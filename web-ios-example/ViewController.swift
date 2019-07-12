@@ -7,12 +7,27 @@
 //
 
 import UIKit
+import WebKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WKUIDelegate {
+    var webView: WKWebView!
+
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        view = webView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        let webView = WKWebView()
+        self.view = webView
+
+        let url = URL(string: "https://bk-ch.web.wlloyalty.net/")
+        let request = URLRequest(url: url!)
+        webView.load(request)
     }
 
 
